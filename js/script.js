@@ -29,7 +29,7 @@ setInterval(function () {
   leftPosition += leftIncrement;
   topPosition += topIncrement;
   moveButterfly(leftPosition, topPosition);
-}, 1);
+}, 2);
 
 const moveButterfly = function (x, y) {
   butterfly.style.left = x + "px";
