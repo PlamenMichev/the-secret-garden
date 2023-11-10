@@ -1,5 +1,4 @@
-//MAKE THE MAGIC HAPPEN
-
+//butterfly movement
 const butterfly = document.querySelector("#butterfly");
 let leftPosition = 1;
 let topPosition = 1;
@@ -8,7 +7,7 @@ let leftIncrement = 1;
 let topIncrement = 1;
 
 setInterval(function () {
-  const rect = butterfly.getBoundingClientRect();
+ const rect = butterfly.getBoundingClientRect();
   const isGoingOffscreenTop = rect.x < -50;
   const isGoingOffscreenLeft = rect.y < -50;
   const isGoingOffscreenRight = rect.x > window.innerWidth - 230;
@@ -40,4 +39,29 @@ function getRandomInt(max) {
   return (Math.random() + 1) * max;
 }
 
-//
+//net movement
+$(document).on('mousemove', function(e){
+   $('#net').css({
+       left:  e.pageX,
+       top:   e.pageY
+    });
+});
+
+//bucket rotation
+var rotation = 0;
+
+jQuery.fn.rotate = function(degrees) {
+    $(this).css({'-webkit-transform' : 'rotate('+ degrees +'deg)',
+                 '-moz-transform' : 'rotate('+ degrees +'deg)',
+                 '-ms-transform' : 'rotate('+ degrees +'deg)',
+                 'transform' : 'rotate('+ degrees +'deg)'});
+    return $(this);
+};
+
+$('#wateringcan').click(function() {
+    console.log(rotation);
+    if(rotation == 0) rotation = -25;
+    else if(rotation == -25) rotation = 0;
+    $(this).rotate(rotation);
+});
+
