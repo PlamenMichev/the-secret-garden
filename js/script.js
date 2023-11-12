@@ -1,5 +1,4 @@
 //butterfly movement
-const net = document.querySelector("#net");
 const butterfly = document.querySelector("#butterfly");
 let leftPosition = 1;
 let topPosition = 1;
@@ -36,11 +35,11 @@ const moveButterfly = function (x, y) {
   butterfly.style.top = y + "px";
 };
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
+ function getRandomInt(max) {
+   return Math.floor(Math.random() * max);
 }
 
-//net movement
+// //net movement
 $(document).on('mousemove', function(e){
    $('#net').css({
        left:  e.pageX,
@@ -48,8 +47,14 @@ $(document).on('mousemove', function(e){
     });
 });
 
-//watering can rotation
+//watering can rotation and waterdrops
 var rotation = 0;
+$('.waterdrop').hide();
+
+setInterval(function drop() {
+  $('.waterdrop').css({top: 400, left: 530+getRandomInt(20), position: 'absolute'})
+  $('.waterdrop').animate({top: 700, left: 550+getRandomInt(10)});
+},750);
 
 jQuery.fn.rotate = function(degrees) {
     $(this).css({'-webkit-transform' : 'rotate('+ degrees +'deg)',
@@ -61,9 +66,18 @@ jQuery.fn.rotate = function(degrees) {
 
 $('#wateringcan').click(function() {
     console.log(rotation);
-    if(rotation == 0) rotation = -25;
-    else if(rotation == -25) rotation = 0;
+    if(rotation == 0) 
+    {
+      rotation = -25;
+      $('.waterdrop').show();
+    }
+    else if(rotation == -25)
+    {
+      rotation = 0;
+      $('.waterdrop').hide();
+    }
     $(this).rotate(rotation);
+    drop();
 });
 
 //apple positioning
