@@ -1,4 +1,5 @@
 //butterfly movement
+const net = document.querySelector("#net");
 const butterfly = document.querySelector("#butterfly");
 let leftPosition = 1;
 let topPosition = 1;
@@ -7,7 +8,7 @@ let leftIncrement = 1;
 let topIncrement = 1;
 
 setInterval(function () {
- const rect = butterfly.getBoundingClientRect();
+  const rect = butterfly.getBoundingClientRect();
   const isGoingOffscreenTop = rect.x < -50;
   const isGoingOffscreenLeft = rect.y < -50;
   const isGoingOffscreenRight = rect.x > window.innerWidth - 230;
@@ -16,7 +17,7 @@ setInterval(function () {
   console.log("left", isGoingOffscreenLeft);
   console.log("right", isGoingOffscreenRight);
   console.log("bot", isGoingOffscreenBottom);
-
+  
   if (isGoingOffscreenLeft || isGoingOffscreenBottom) {
     topIncrement = -topIncrement;
   }
@@ -28,7 +29,7 @@ setInterval(function () {
   leftPosition += leftIncrement;
   topPosition += topIncrement;
   moveButterfly(leftPosition, topPosition);
-}, 2);
+}, 25);
 
 const moveButterfly = function (x, y) {
   butterfly.style.left = x + "px";
@@ -36,7 +37,7 @@ const moveButterfly = function (x, y) {
 };
 
 function getRandomInt(max) {
-  return (Math.random() + 1) * max;
+  return Math.floor(Math.random() * max);
 }
 
 //net movement
@@ -47,7 +48,7 @@ $(document).on('mousemove', function(e){
     });
 });
 
-//bucket rotation
+//watering can rotation
 var rotation = 0;
 
 jQuery.fn.rotate = function(degrees) {
@@ -65,3 +66,33 @@ $('#wateringcan').click(function() {
     $(this).rotate(rotation);
 });
 
+//apple positioning
+
+const apple1 = document.querySelector("#apple1");
+const apple2 = document.querySelector("#apple2");
+const apple3 = document.querySelector("#apple3");
+
+const screenWidth = window.screen.width;
+const screenHeight = window.screen.height;
+
+apple1.style.left = (getRandomInt(screenWidth/2.55)+screenWidth/1.75) + "px";
+apple2.style.left = (getRandomInt(screenWidth/2.55)+screenWidth/1.75) + "px";
+apple3.style.left = (getRandomInt(screenWidth/2.55)+screenWidth/1.75) + "px";
+
+apple1.style.top = getRandomInt(screenHeight/3.35) + "px";
+apple2.style.top = getRandomInt(screenHeight/3.35) + "px";
+apple3.style.top = getRandomInt(screenHeight/3.35) + "px";
+
+//apple movement
+
+$('#apple1').click(function(){
+  $('#apple1').animate({top: 460, left: 300});
+})
+
+$('#apple2').click(function(){
+  $('#apple2').animate({top: 460, left: 350});
+})
+
+$('#apple3').click(function(){
+  $('#apple3').animate({top: 460, left: 400});
+})
