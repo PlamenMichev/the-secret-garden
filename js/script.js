@@ -12,11 +12,7 @@ setInterval(function () {
   const isGoingOffscreenLeft = rect.y < -50;
   const isGoingOffscreenRight = rect.x > window.innerWidth - 230;
   const isGoingOffscreenBottom = rect.y > window.innerHeight - 150;
-  console.log("top", isGoingOffscreenTop);
-  console.log("left", isGoingOffscreenLeft);
-  console.log("right", isGoingOffscreenRight);
-  console.log("bot", isGoingOffscreenBottom);
-  
+
   if (isGoingOffscreenLeft || isGoingOffscreenBottom) {
     topIncrement = -topIncrement;
   }
@@ -51,9 +47,18 @@ $(document).on('mousemove', function(e){
 var rotation = 0;
 $('.waterdrop').hide();
 
+const wateringcan = document.querySelector("#wateringcan");
+let rec = wateringcan.getBoundingClientRect();
+
+const x2 = rec.x;
+const y2 = rec.y;
+const height2 = rec.height;
+
+
 setInterval(function drop() {
-  $('.waterdrop').css({top: 400, left: 530+getRandomInt(20), position: 'absolute'})
-  $('.waterdrop').animate({top: 700, left: 550+getRandomInt(10)});
+  rand = getRandomInt(10);
+  $('.waterdrop').css({top: y2+height/10, left: x2-rand, position: 'absolute'})
+  $('.waterdrop').animate({top: screen.height, left: x2-rand});
 },750);
 
 jQuery.fn.rotate = function(degrees) {
@@ -81,32 +86,43 @@ $('#wateringcan').click(function() {
 });
 
 //apple positioning
+const tree = document.querySelector("#tree");
+let rect = tree.getBoundingClientRect();
 
 const apple1 = document.querySelector("#apple1");
 const apple2 = document.querySelector("#apple2");
 const apple3 = document.querySelector("#apple3");
 
-const screenWidth = window.screen.width;
-const screenHeight = window.screen.height;
+let x = rect.x;
+let y = rect.y;
+let height = rect.height;
+let width = rect.width;
 
-apple1.style.left = (getRandomInt(screenWidth/2.55)+screenWidth/1.75) + "px";
-apple2.style.left = (getRandomInt(screenWidth/2.55)+screenWidth/1.75) + "px";
-apple3.style.left = (getRandomInt(screenWidth/2.55)+screenWidth/1.75) + "px";
+apple1.style.left = (width/5 + getRandomInt(width/2) + x) + "px";
+apple2.style.left = (width/5 + getRandomInt(width/2) + x) + "px";
+apple3.style.left = (width/5 + getRandomInt(width/2) + x) + "px";
 
-apple1.style.top = getRandomInt(screenHeight/3.35) + "px";
-apple2.style.top = getRandomInt(screenHeight/3.35) + "px";
-apple3.style.top = getRandomInt(screenHeight/3.35) + "px";
+apple1.style.top = (getRandomInt(height/2) + y + height/11) + "px";
+apple2.style.top = (getRandomInt(height/2) + y + height/11) + "px";
+apple3.style.top = (getRandomInt(height/2) + y + height/11) + "px";
 
 //apple movement
+const basket = document.querySelector(".basket");
+let rect1 = basket.getBoundingClientRect();
+
+let x1 = rect1.x;
+let y1 = rect1.y;
+let height1 = rect1.height;
+let width1 = rect1.width;
 
 $('#apple1').click(function(){
-  $('#apple1').animate({top: 460, left: 300});
+  $('#apple1').animate({top: y1 + height1/2, left: x1 + width1/(getRandomInt(10)+2)});
 })
 
 $('#apple2').click(function(){
-  $('#apple2').animate({top: 460, left: 350});
+  $('#apple2').animate({top: y1 + height1/2, left: x1 + width1/(getRandomInt(10)+2)});
 })
 
 $('#apple3').click(function(){
-  $('#apple3').animate({top: 460, left: 400});
+  $('#apple3').animate({top: y1 + height1/2, left: x1 + width1/(getRandomInt(10)+2)});
 })

@@ -15,6 +15,7 @@ body {
   position: fixed;
   bottom: 20%;
   left: 40%;
+  z-index: 4;
 }
 
 .waterdrop {
@@ -25,12 +26,14 @@ body {
   height: 600px;
   width: auto;
   position: absolute;
+  z-index: 3;
 }
 
 .apple {
   height: 50px;
   width: auto;
   position: absolute;
+  z-index: 4;
 }
 
 #tree {
