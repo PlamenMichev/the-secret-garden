@@ -43,9 +43,12 @@ $(document).on('mousemove', function(e){
     });
 });
 
-//watering can rotation and waterdrops
+//watering can rotation and waterdrops + flowers
+
 var rotation = 0;
 $('.waterdrop').hide();
+$('#fday').hide();
+$('#fnight').hide();
 
 const wateringcan = document.querySelector("#wateringcan");
 let rec = wateringcan.getBoundingClientRect();
@@ -54,12 +57,14 @@ const x2 = rec.x;
 const y2 = rec.y;
 const height2 = rec.height;
 
-
 setInterval(function drop() {
   rand = getRandomInt(10);
   $('.waterdrop').css({top: y2+height/10, left: x2-rand, position: 'absolute'})
   $('.waterdrop').animate({top: screen.height, left: x2-rand});
 },750);
+
+$('#fday').css({bottom: 0, left: x2 - 100, position: 'absolute'});
+$('#fnight').css({bottom: 0, left: x2 - 100, position: 'absolute'});
 
 jQuery.fn.rotate = function(degrees) {
     $(this).css({'-webkit-transform' : 'rotate('+ degrees +'deg)',
@@ -75,11 +80,15 @@ $('#wateringcan').click(function() {
     {
       rotation = -25;
       $('.waterdrop').show();
+      $('#fday').hide();
+      $('#fnight').hide();
     }
     else if(rotation == -25)
     {
       rotation = 0;
       $('.waterdrop').hide();
+      if(document.body.style.backgroundColor == 'aqua')  $('#fday').show();
+      else $('#fnight').show();
     }
     $(this).rotate(rotation);
     drop();
@@ -106,6 +115,18 @@ apple1.style.top = (getRandomInt(height/2) + y + height/11) + "px";
 apple2.style.top = (getRandomInt(height/2) + y + height/11) + "px";
 apple3.style.top = (getRandomInt(height/2) + y + height/11) + "px";
 
+//woodpecker
+$('#woodpecker').hide();
+
+const wood = document.querySelector("#wood");
+wood.style.left = (x + width/2.4) + "px";
+wood.style.top = (y + height/1.5) + "px";
+
+$('#woodpecker').css({left: x + width/2.4, top: y + height/2, position: 'absolute'});
+
+$('#wood').click(function(){
+  $('#woodpecker').show();
+})
 //apple movement
 const basket = document.querySelector(".basket");
 let rect1 = basket.getBoundingClientRect();
@@ -126,3 +147,28 @@ $('#apple2').click(function(){
 $('#apple3').click(function(){
   $('#apple3').animate({top: y1 + height1/2, left: x1 + width1/(getRandomInt(10)+2)});
 })
+
+//changing background color
+document.body.style.backgroundColor = 'aqua';
+
+document.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    if(document.body.style.backgroundColor == 'aqua')
+    {
+        document.body.style.backgroundColor = '#00008B';
+        $("#apple1").attr('src',"images/apple_night.png");
+        $("#apple2").attr('src',"images/apple_night.png");
+        $("#apple3").attr('src',"images/apple_night.png");
+    }
+    else
+    {
+        document.body.style.backgroundColor = 'aqua';
+        $("#apple1").attr('src',"images/apple.png");
+        $("#apple2").attr('src',"images/apple.png");
+        $("#apple3").attr('src',"images/apple.png");
+    }
+  }
+});
+
+
+
