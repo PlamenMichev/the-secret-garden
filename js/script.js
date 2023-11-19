@@ -47,8 +47,7 @@ $(document).on('mousemove', function(e){
 
 var rotation = 0;
 $('.waterdrop').hide();
-$('#fday').hide();
-$('#fnight').hide();
+$('#flower').hide();
 
 const wateringcan = document.querySelector("#wateringcan");
 let rec = wateringcan.getBoundingClientRect();
@@ -63,8 +62,7 @@ setInterval(function drop() {
   $('.waterdrop').animate({top: screen.height, left: x2-rand});
 },750);
 
-$('#fday').css({bottom: 0, left: x2 - 100, position: 'absolute'});
-$('#fnight').css({bottom: 0, left: x2 - 100, position: 'absolute'});
+$('#flower').css({bottom: 0, left: x2 - 100, position: 'absolute'});
 
 jQuery.fn.rotate = function(degrees) {
     $(this).css({'-webkit-transform' : 'rotate('+ degrees +'deg)',
@@ -80,15 +78,13 @@ $('#wateringcan').click(function() {
     {
       rotation = -25;
       $('.waterdrop').show();
-      $('#fday').hide();
-      $('#fnight').hide();
+      $('#flower').hide();
     }
     else if(rotation == -25)
     {
       rotation = 0;
       $('.waterdrop').hide();
-      if(document.body.style.backgroundColor == 'aqua')  $('#fday').show();
-      else $('#fnight').show();
+      $('#flower').show();
     }
     $(this).rotate(rotation);
     drop();
@@ -124,9 +120,12 @@ wood.style.top = (y + height/1.5) + "px";
 
 $('#woodpecker').css({left: x + width/2.4, top: y + height/2, position: 'absolute'});
 
-$('#wood').click(function(){
+$('#wood').hover(function(){
   $('#woodpecker').show();
-})
+}, function(){
+  $('#woodpecker').hide();
+});
+
 //apple movement
 const basket = document.querySelector(".basket");
 let rect1 = basket.getBoundingClientRect();
@@ -159,6 +158,7 @@ document.addEventListener("keypress", function(event) {
         $("#apple1").attr('src',"images/apple_night.png");
         $("#apple2").attr('src',"images/apple_night.png");
         $("#apple3").attr('src',"images/apple_night.png");
+        $("#flower").attr('src',"images/flower_night.png");
     }
     else
     {
@@ -166,6 +166,7 @@ document.addEventListener("keypress", function(event) {
         $("#apple1").attr('src',"images/apple.png");
         $("#apple2").attr('src',"images/apple.png");
         $("#apple3").attr('src',"images/apple.png");
+        $("#flower").attr('src',"images/flower_day.png");
     }
   }
 });
