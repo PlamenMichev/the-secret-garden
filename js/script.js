@@ -12,10 +12,6 @@ setInterval(function () {
   const isGoingOffscreenLeft = rect.y < -50;
   const isGoingOffscreenRight = rect.x > window.innerWidth - 230;
   const isGoingOffscreenBottom = rect.y > window.innerHeight - 150;
-  console.log("top", isGoingOffscreenTop);
-  console.log("left", isGoingOffscreenLeft);
-  console.log("right", isGoingOffscreenRight);
-  console.log("bot", isGoingOffscreenBottom);
 
   if (isGoingOffscreenLeft || isGoingOffscreenBottom) {
     topIncrement = -topIncrement;
@@ -105,7 +101,6 @@ jQuery.fn.rotate = function (degrees) {
 };
 
 $("#wateringcan").click(function () {
-  console.log(rotation);
   if (rotation == 0) {
     rotation = -25;
     $(".waterdrop").show();
