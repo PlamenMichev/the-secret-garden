@@ -49,6 +49,11 @@ body {
   left: 20%;
 }
 
+#wood{
+  position: absolute;
+  z-index: 6;
+}
+
 body {
   margin: 0px;
   background-image: url("../images/grass.png");
