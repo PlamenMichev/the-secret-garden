@@ -3,8 +3,8 @@ const butterfly = document.querySelector("#butterfly");
 let leftPosition = 1;
 let topPosition = 1;
 
-let leftIncrement = 1;
-let topIncrement = 1;
+let leftIncrement = getRandomDirection();
+let topIncrement = getRandomDirection();
 
 setInterval(function () {
   const rect = butterfly.getBoundingClientRect();
@@ -12,7 +12,11 @@ setInterval(function () {
   const isGoingOffscreenLeft = rect.y < -50;
   const isGoingOffscreenRight = rect.x > window.innerWidth - 230;
   const isGoingOffscreenBottom = rect.y > window.innerHeight - 150;
-
+  console.log("top", isGoingOffscreenTop);
+  console.log("left", isGoingOffscreenLeft);
+  console.log("right", isGoingOffscreenRight);
+  console.log("bot", isGoingOffscreenBottom);
+  
   if (isGoingOffscreenLeft || isGoingOffscreenBottom) {
     topIncrement = -topIncrement;
   }
@@ -21,6 +25,14 @@ setInterval(function () {
     leftIncrement = -leftIncrement;
   }
 
+  // setInterval(() => {
+    if (Math.random()*2 < 0.10) {
+      leftIncrement = getRandomDirection();
+      topIncrement = getRandomDirection();
+    }
+    
+  // }, 200);
+  
   leftPosition += leftIncrement;
   topPosition += topIncrement;
   moveButterfly(leftPosition, topPosition);
@@ -30,6 +42,10 @@ const moveButterfly = function (x, y) {
   butterfly.style.left = x + "px";
   butterfly.style.top = y + "px";
 };
+
+function getRandomDirection() {
+  return Math.random() > 0.5 ? Math.floor(Math.random()*10) : -Math.floor(Math.random()*10); // Randomly choose either 1 or -1
+}
 
  function getRandomInt(max) {
    return Math.floor(Math.random() * max);
